@@ -3,8 +3,8 @@
 from django import forms
 
 
-class DocumentForm(forms.Form):
-    docfile = forms.FileField(
+class ImageForm(forms.Form):
+    image = forms.FileField(
         label='Одберете слика:'
     )
 

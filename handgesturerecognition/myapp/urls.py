@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url
-from handgesturerecognition.myapp.views import list
+from handgesturerecognition.myapp.views import imageUpload
 
 urlpatterns = [
-    url(r'^list/$', list, name='list')
+    url(r'^imageUpload/$', imageUpload, name='imageUpload')
 ]

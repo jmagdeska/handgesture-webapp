@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Hand Gesture Recognition Project</title>
+        <script src="/static/script.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<!--
+        <script type="text/javascript">
+            var output = {{ output }};  // no_record_check **must** be an integer
+            alert(output);
+            
+        </script> -->
+
+    <!--     <script type="text/javascript">
+            $(document).ready(function() {
+                $(function() {
+                    $("#predicted_output").dialog({
+                        modal: true,
+                        closeOnEscape: false,
+                        dialogClass: "no-close",
+                        resizable: false,
+                        draggable: false,
+                        width: 600,
+                        buttons: [
+                            {
+                                text: "OK",
+                                click: function() {
+                                $( this ).dialog( "close" );
+                                }
+                            }
+                        ]
+                    });
+                });
+            });
+        </script> -->
+
+    </head>
+
+    <style>
+   
+        body{
+            background-color: #f2f2f2;
+        }
+ 
+        img{
+            align-content: center;
+            width: 320px;
+            height: 240px;
+        }
+ 
+        button{
+            width: auto;
+            height: 40px;
+            text-align: center;
+            background-color: #1b6d85;
+            color: #ffffff;
+            font-size: 30px;
+            margin-top: 20px;
+        }
+    </style>
+ 
+
+    <body>
+        <!-- imageUpload of uploaded documents -->
+        <h1 align="center" style="color: #993333; font-family:verdana"> Препознавање на знаци од знаковен јазик </h1>
+
+        <p align="center" style="font-family: verdana"> Ви благодариме на интересот да допринесете за креирање <br> на подобра датабаза од знаци на македонски знаковен јазик. </p> <br>
+
+        <p align="center" style="font-family: verdana; font-size: 14px"> За да прикачите слика, потребно е да кликнете на копчето <i> Choose file. </i> </p>
+        <p align="center" style="font-family: verdana; font-size: 14px"> По одбирање на сликата, кликнете на <i> Прикачи. </i> </p>
+
+        <br>
+    <!--     <p style="font-family:verdana"> imageUpload of uploaded images: </p>
+
+        {% if documents %}
+            <ul>
+                {% for document in documents %}
+                    <li><a href="{{ document.image.url }}">{{ document.image.name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No documents.</p>    
+        {% endif %} -->
+
+        <!-- Upload form. Note enctype attribute! -->
+
+
+        <div align="center">
+            <form  id="form" action="{% url "imageUpload" %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}    
+
+                {% if messages %}
+                   {% for message in messages %}
+                        <div id="predicted_output" title="Some Flag">
+                            <p style="font-family: verdana; font-size: 12px; color: #993333;" > {{ message }} </p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+    
+                <p>{{ form.non_field_errors }}</p>
+      
+                <p onchange="previewFile()">
+                    {{ form.image.errors }}
+                    {{ form.image }}
+                </p>
+        
+                
+                <p><input type="submit" value="Прикачи"/></p>
+            </form>
+        </div>
+
+    </body>
+</html>
